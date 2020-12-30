@@ -22,7 +22,7 @@ mongoose.connection.on("error", function (error) { console.log(error)})
 
 app.use("/imagenes/", imagenesRoutes);
 app.use("/imagenes/:id", imagenesRoutes);
-const port = config.Port || 3000;
+const port = process.env.PORT || config.Port;
 
 app.listen(port,function(req,res){
     console.log("Server is started on port "+port);
