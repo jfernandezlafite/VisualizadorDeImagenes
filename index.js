@@ -22,6 +22,7 @@ mongoose.connection.on("error", function (error) { console.log(error)})
 
 app.use("/imagenes/", imagenesRoutes);
 app.use("/imagenes/:id", imagenesRoutes);
+app.use("/imagenes/upload", imagenesRoutes);
 const port = process.env.PORT || config.Port;
 
 app.listen(port,function(req,res){
