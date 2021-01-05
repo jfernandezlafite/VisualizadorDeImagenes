@@ -23,7 +23,7 @@ const multiPartMiddleware = multipart({
     uploadDir:'https://application-0-emvrx.mongodbstitch.com/assets/images';
 });
 
-router.post('/upload', function(req, res){
+router.post('/upload',multiPartMiddleware, function(req, res){
     res.json({'mensaje':'Fichero subido'});
 });
 
