@@ -27,15 +27,7 @@ const uploader = multer({
 router.post('/upload', uploader, async (req, res) => {
     const {body, file} = req
     if(file && body){
-        const newImage = new Image({
-            fileName: body.name,
-            fileUrl : `http://localhost:3000/${file.filename}`
-        })
-        await newImage.save()
-
-        res.json({
-            newImage: newImage
-        })
+      
     }
 })
 
