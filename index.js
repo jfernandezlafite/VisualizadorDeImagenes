@@ -35,7 +35,7 @@ app.use("/imagenes/newImage", imagenesRoutes);
 
 
 //listening server
-const port = config.Port || process.env.PORT;
+const port = process.env.PORT || config.Port;
 app.listen(port,function(req,res){
     console.log("Server is started on port "+port);
 });
