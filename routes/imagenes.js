@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const imagenes = require('../models/imagenes');
+const storage = require('../config/multer');
+const multer = require('multer');
 
 router.get('', function(req, res){
     var query = imagenes.find();
@@ -18,7 +20,26 @@ router.get('/:id', function(req, res){
     });
 });
 
-router.post('', function(req, res){
+const uploader = multer({
+    storage
+}).single('file')
+
+router.post('/upload', uploader, async (req, res) => {
+    const {body, file} = req
+    if(file && body){
+        const newImage = new Image({
+            fileName: body.name,
+            fileUrl : `http://localhost:3000/${file.filename}`
+        })
+        await newImage.save()
+
+        res.json({
+            newImage: newImage
+        })
+    }
+})
+
+router.post('/newImage', function(req, res){
     if (!req.body) {
         return res.status(400).json({
             status: 'error',
