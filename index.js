@@ -21,7 +21,7 @@ app.options(function (req, res, next) {
 });
 
 //static files
-app.use(express.static(path.join(__dirname,'app/upload')));
+app.use(express.static('app/upload'));
 
 
 //database connection
