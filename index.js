@@ -32,7 +32,7 @@ mongoose.connect(config.DB_URI,{ useNewUrlParser: true, useUnifiedTopology: true
 //routes
 app.use("/imagenes/", imagenesRoutes);
 app.use("/imagenes/:id", imagenesRoutes);
-//app.use("/imagenes/upload", imagenesRoutes);
+app.use("/imagenes/upload", imagenesRoutes);
 app.use("/imagenes/newImage", imagenesRoutes);
 
 
