@@ -21,7 +21,7 @@ app.options(function (req, res, next) {
 });
 
 //static files
-app.use(express.static('app/upload'));
+app.use(express.static('https://stitch-statichosting-prod.s3.amazonaws.com/5f912719421334c99e7d637b/assets/images/'));
 
 
 //database connection
