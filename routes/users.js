@@ -3,9 +3,9 @@ const router = express.Router();
 const users = require('../models/users');
 
 // GET ALL USER
-router.get('/:name', function(req, res){
-    var name = req.params.name;
-    var query = users.findOne({"userName":name});
+router.get('/:userName', function(req, res){
+    var userName = req.params.userName;
+    var query = users.findOne({"userName":userName});
     query.exec(function( err , foundusers) {
         res.json(foundusers);
     });
