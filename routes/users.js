@@ -2,10 +2,18 @@ const express = require("express");
 const router = express.Router();
 const users = require('../models/users');
 
-// GET ALL USER
-router.get('/:userName', function(req, res){
-    var userName = req.params.userName;
-    var query = users.findOne({"userName":userName});
+//GET ALL USERS
+router.get('', function(req, res){
+    var query = users.find();
+    query.exec(function( err , foundusers) {
+        res.json(foundusers);
+    });
+});
+
+// GET USER
+router.get('/:name', function(req, res){
+    var name = req.params.name;
+    var query = users.findOne({"userName":name});
     query.exec(function( err , foundusers) {
         res.json(foundusers);
     });
