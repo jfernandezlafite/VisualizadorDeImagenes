@@ -35,7 +35,7 @@ app.use("/imagenes/", imagenesRoutes);
 app.use("/imagenes/:id", imagenesRoutes);
 app.use("/imagenes/upload", imagenesRoutes);
 app.use("/imagenes/newImage", imagenesRoutes);
-app.use("/users/:name", userRoutes);
+app.use("/users/:userName", userRoutes);
 app.use("/users/newUser", userRoutes);
 
 //listening server
