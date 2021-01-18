@@ -31,11 +31,12 @@ mongoose.connect(config.DB_URI,{ useNewUrlParser: true, useUnifiedTopology: true
 .catch(error => console.log(error));
 
 //routes
+app.use("/users/:userName", userRoutes);
+
 app.use("/imagenes/", imagenesRoutes);
 app.use("/imagenes/:id", imagenesRoutes);
 app.use("/imagenes/upload", imagenesRoutes);
 app.use("/imagenes/newImage", imagenesRoutes);
-app.use("/users/:userName", userRoutes);
 app.use("/users/newUser", userRoutes);
 
 //listening server
