@@ -33,12 +33,12 @@ router.post('/newUser', function(req, res){
         });
 
         var user = {
-            userName: req.body.userName,
+            userName: req.body.Username,
             password: req.body.password,
-            name: req.body.name,
-            surname: req.body.surname,
+            name: req.body.First_name,
+            surname: req.body.Last_name,
             email: req.body.email,
-            admin: req.body.admin
+            admin: false
         }
         users.watch()
         users.create(user, function (err, res) {

@@ -10,8 +10,16 @@ router.get('', function(req, res){
     });
 });
 
+router.get('/:id', function(req, res){
+    var id = req.params.id;
+    var query = posts.find({"idForo":id});
+    query.exec(function( err , foundposts) {
+        res.json(foundposts);
+    });
+});
+
 // NEW POST
-router.post('/newPost', function(req, res){
+router.post('/newPost/:id', function(req, res){
     if (!req.body) {
         return res.status(400).json({
             status: 'error',
@@ -25,8 +33,10 @@ router.post('/newPost', function(req, res){
 
         var post = {
             id: req.body.id,
-            idForo: req.body.idForo,
+            idForo: req.params.id,
             respuesta: req.body.respuesta,
+            idUsuario:req.body.idUsuario,
+            createdAt: formatDate(Date.now())
         }
         posts.watch()
         posts.create(post, function (err, res) {
@@ -65,5 +75,19 @@ router.post('/delete/:id', function (req, res, next) {
         res.send(post);
     });
 });
+
+function formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) 
+        month = '0' + month;
+    if (day.length < 2) 
+        day = '0' + day;
+
+    return [year, month, day].join('-');
+}
 
 module.exports = router;

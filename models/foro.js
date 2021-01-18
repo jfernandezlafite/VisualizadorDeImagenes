@@ -4,9 +4,10 @@ const Schema = mongoose.Schema;
 const forosSchema = new Schema({
     id: Number,
     title: String,
-    numRespuestas: Number
+    numRespuestas: Number,
+    createdAt:String
     
 });
 
-module.exports = mongoose.model('foros', forosSchema, 'foros' );
+module.exports = mongoose.model('Foro', forosSchema, 'Foro' );
 

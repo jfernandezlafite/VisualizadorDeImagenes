@@ -11,7 +11,7 @@ router.get('', function(req, res){
 });
 
 // NEW foro
-router.foro('/newforo', function(req, res){
+router.post('/newforo', function(req, res){
     if (!req.body) {
         return res.status(400).json({
             status: 'error',
@@ -26,7 +26,8 @@ router.foro('/newforo', function(req, res){
         var foro = {
             id: req.body.id,
             title: req.body.title,
-            numRespuestas: req.body.numRespuestas,
+            numRespuestas: 0,
+            createdAt: formatDate(Date.now())
         }
         foros.watch()
         foros.create(foro, function (err, res) {
@@ -36,7 +37,7 @@ router.foro('/newforo', function(req, res){
 });
 
 // UPDATE foro BY ID
-router.foro('/update/:id', function (req, res, next) {
+router.post('/update/:id', function (req, res, next) {
     if (!req.body) {
         return res.status(400).json({
             status: 'error',
@@ -48,13 +49,14 @@ router.foro('/update/:id', function (req, res, next) {
             data: req.body,
         });
         var id = req.params.id;
+        var numRespuestas = req.body.numRespuestas;
         const query = foros.findOneAndUpdate({ "id": id }, { "numRespuestas": numRespuestas });
         query.exec();
     }
 })
 
 // DELETE foro BY ID
-router.foro('/delete/:id', function (req, res, next) {
+router.post('/delete/:id', function (req, res, next) {
     var id = req.params.id;
     const query = foros.findOneAndDelete({ "id": id });
     query.select("-_id -__v");
@@ -65,5 +67,19 @@ router.foro('/delete/:id', function (req, res, next) {
         res.send(foro);
     });
 });
+
+function formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) 
+        month = '0' + month;
+    if (day.length < 2) 
+        day = '0' + day;
+
+    return [year, month, day].join('-');
+}
 
 module.exports = router;
