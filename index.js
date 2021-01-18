@@ -5,6 +5,8 @@ const config = require('./config/dev');
 const path = require('path');
 
 const imagenesRoutes = require('./routes/imagenes');
+const userRoutes = require('./routes/users');
+
 //iniziaclizaciones
 var app = express();
 
@@ -21,8 +23,7 @@ app.options(function (req, res, next) {
 });
 
 //static files
-app.use(express.static('https://stitch-statichosting-prod.s3.amazonaws.com/5f912719421334c99e7d637b/assets/images/'));
-
+app.use(express.static(path.join(__dirname,"app/upload")));
 
 //database connection
 mongoose.connect(config.DB_URI,{ useNewUrlParser: true, useUnifiedTopology: true })
@@ -34,7 +35,8 @@ app.use("/imagenes/", imagenesRoutes);
 app.use("/imagenes/:id", imagenesRoutes);
 app.use("/imagenes/upload", imagenesRoutes);
 app.use("/imagenes/newImage", imagenesRoutes);
-
+app.use("/users/", userRoutes);
+app.use("/users/newUser", userRoutes);
 
 //listening server
 const port = process.env.PORT || config.Port;
